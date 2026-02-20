@@ -4,10 +4,11 @@ import ChatMessage from '@/components/ChatMessage';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useSSEQuery } from '@/hooks/useSSEQuery';
 import { useVideos } from '@/hooks/useVideos';
+import { useChatMessages } from '@/context/ChatContext';
 import type { ChatMessage as ChatMessageType } from '@/types';
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState<ChatMessageType[]>([]);
+  const { messages, setMessages } = useChatMessages();
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);

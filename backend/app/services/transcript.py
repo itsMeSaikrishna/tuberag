@@ -28,7 +28,12 @@ def get_transcript(video_url: str) -> tuple[str, list[dict], str]:
     video_id = extract_video_id(video_url)
 
     try:
-        segments = YouTubeTranscriptApi.get_transcript(video_id)
+        api = YouTubeTranscriptApi()
+        transcript = api.fetch(video_id)
+        segments = [
+            {"text": s.text, "start": s.start, "duration": s.duration}
+            for s in transcript
+        ]
     except Exception as e:
         raise HTTPException(
             status_code=404,
