@@ -2,6 +2,8 @@ import re
 from fastapi import HTTPException
 from youtube_transcript_api import YouTubeTranscriptApi
 
+from app.config import settings
+
 
 def extract_video_id(url: str) -> str:
     """Extract video ID from various YouTube URL formats."""
@@ -29,7 +31,8 @@ def get_transcript(video_url: str) -> tuple[str, list[dict], str]:
 
     try:
         api = YouTubeTranscriptApi()
-        transcript = api.fetch(video_id)
+        proxies = {"https": settings.proxy_url} if settings.proxy_url else None
+        transcript = api.fetch(video_id, proxies=proxies)
         segments = [
             {"text": s.text, "start": s.start, "duration": s.duration}
             for s in transcript

@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     top_k: int = 5
     chunk_size: int = 1000
     chunk_overlap: int = 200
+    proxy_url: str = ""
     allowed_origins: str = "http://localhost:5173"
 
     @property
