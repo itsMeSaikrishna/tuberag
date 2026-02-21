@@ -9,4 +9,4 @@ services:
       - key: GROQ_API_KEY
         sync: false
       - key: ALLOWED_ORIGINS
-        value: https://tuberag.vercel.app
+        value: https://tuberag-who2.vercel.app
