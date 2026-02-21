@@ -30,9 +30,9 @@ def get_transcript(video_url: str) -> tuple[str, list[dict], str]:
     video_id = extract_video_id(video_url)
 
     try:
-        api = YouTubeTranscriptApi()
         proxies = {"https": settings.proxy_url} if settings.proxy_url else None
-        transcript = api.fetch(video_id, proxies=proxies)
+        api = YouTubeTranscriptApi(proxies=proxies)
+        transcript = api.fetch(video_id)
         segments = [
             {"text": s.text, "start": s.start, "duration": s.duration}
             for s in transcript
